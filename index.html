@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to Hack</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.5s;
+        }
+
+        #countdown {
+            font-size: 5rem;
+            color: red;
+            animation: blink 1s infinite;
+        }
+
+        #hacked-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            animation: flicker 2s infinite;
+            color: limegreen;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: red;
+            animation: blink 1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.1; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .glitch {
+            color: green;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            animation: glitch-animation 1.5s infinite;
+        }
+
+        @keyframes glitch-animation {
+            0% {
+                clip: rect(24px, 9999px, 77px, 0);
+                transform: skew(0.3deg);
+            }
+            20% {
+                clip: rect(18px, 9999px, 20px, 0);
+                transform: skew(0.6deg);
+            }
+            40% {
+                clip: rect(85px, 9999px, 140px, 0);
+                transform: skew(1.2deg);
+            }
+            60% {
+                clip: rect(45px, 9999px, 70px, 0);
+                transform: skew(0.1deg);
+            }
+            80% {
+                clip: rect(50px, 9999px, 100px, 0);
+                transform: skew(0.3deg);
+            }
+            100% {
+                clip: rect(24px, 9999px, 77px, 0);
+                transform: skew(0.3deg);
+            }
+        }
+
+        .bottom-text {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: limegreen;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="countdown-screen">
+        <h1>System Countdown: <span id="countdown">10</span></h1>
+    </div>
+
+    <div id="hacked-screen">
+        <h1 class="glitch">YOU'VE BEEN HACKED!</h1>
+        <p>Unauthorized access detected!</p>
+        <div class="bottom-text">
+            <p>Data Extraction in Progress... 67%</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize countdown timer
+        let countdownNumber = 10;
+        let countdownElement = document.getElementById("countdown");
+
+        // Update countdown every second
+        let countdownInterval = setInterval(function() {
+            countdownNumber--;
+            countdownElement.textContent = countdownNumber;
+
+            // When countdown reaches zero
+            if (countdownNumber <= 0) {
+                clearInterval(countdownInterval);
+                showHackedScreen();
+            }
+        }, 1000);
+
+        // Function to show the hacked screen
+        function showHackedScreen() {
+            document.body.style.backgroundColor = "black";
+            document.getElementById("countdown-screen").style.display = "none";
+            document.getElementById("hacked-screen").style.display = "flex";
+        }
+    </script>
+
+</body>
+</html>
